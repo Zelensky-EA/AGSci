@@ -1,0 +1,238 @@
+{
+  "departmentKey": "EAHS_AG",
+  "name": "Everett Alvarez Agriculture",
+  "shortName": "EAHS Ag",
+  "skuPrefix": "EAHS-AG-",
+  "locations": [
+    "214",
+    "215",
+    "Prep Area",
+    "Shop",
+    "Floristry",
+    "Shed",
+    "Farm"
+  ],
+  "categories": [
+    "Hand tools",
+    "Power tools",
+    "Welding equipment",
+    "Welding consumables",
+    "Metal stock",
+    "Lumber & woodworking",
+    "Hardware & fasteners",
+    "Electrical supplies",
+    "Plumbing & irrigation",
+    "Concrete & masonry",
+    "Measuring & layout",
+    "Engines & machinery",
+    "Machinery maintenance",
+    "Farm tools",
+    "Fencing & farm infrastructure",
+    "Seeds & propagation",
+    "Plants & nursery stock",
+    "Soils & growing media",
+    "Fertilizers & amendments",
+    "Pots & propagation containers",
+    "Greenhouse equipment",
+    "Plant care tools",
+    "Pest management supplies",
+    "Floral tools",
+    "Fresh flowers & foliage",
+    "Floral mechanics & consumables",
+    "Floral containers & decor",
+    "Dried & artificial florals",
+    "Animal handling equipment",
+    "Animal housing & husbandry",
+    "Feed & supplements",
+    "Bedding & animal care consumables",
+    "Veterinary equipment",
+    "Veterinary supplies",
+    "Agriscience lab equipment",
+    "Lab chemicals & reagents",
+    "Lab consumables",
+    "Soil & water testing",
+    "Forestry & natural resources",
+    "Food science equipment",
+    "Food science consumables",
+    "PPE & safety equipment",
+    "Disposable PPE & first aid",
+    "Cleaning & sanitation",
+    "Storage & facilities",
+    "Technology & electronics",
+    "Books & curriculum",
+    "FFA & leadership materials",
+    "SAE & recordkeeping supplies",
+    "Classroom & office supplies",
+    "Other"
+  ],
+  "units": [
+    "each",
+    "set",
+    "kit",
+    "pair",
+    "box",
+    "case",
+    "pack",
+    "bag",
+    "bale",
+    "bottle",
+    "jar",
+    "can",
+    "pail",
+    "bucket",
+    "jug",
+    "roll",
+    "spool",
+    "sheet",
+    "board",
+    "bundle",
+    "tray",
+    "flat",
+    "pot",
+    "stem",
+    "plant",
+    "packet"
+  ],
+  "courses": [
+    "Agricultural Business",
+    "Agricultural Mechanics",
+    "Agriscience",
+    "Animal Science",
+    "Forestry and Natural Resources",
+    "Ornamental Horticulture",
+    "Plant and Soil Science",
+    "Floral Design",
+    "Sustainable Agriculture",
+    "Veterinary Science",
+    "Agricultural Biology",
+    "Agricultural Chemistry",
+    "Food Science",
+    "FFA / Leadership",
+    "SAE / Farm Projects"
+  ],
+  "timeZone": "America/Los_Angeles",
+  "schoolEmailDomain": "salinasuhsd.org",
+  "pricingTaskLabel": "EAHS Ag inventory pricing",
+  "pricingTaskConfigured": false,
+  "reservationAdvanceDays": 14,
+  "minimumDays": [],
+  "closedDates": [],
+  "reservationSlots": {
+    "regular": [
+      {
+        "id": "P1",
+        "label": "Period 1",
+        "start": "08:45",
+        "end": "09:44"
+      },
+      {
+        "id": "P2",
+        "label": "Period 2",
+        "start": "09:51",
+        "end": "10:48"
+      },
+      {
+        "id": "P3",
+        "label": "Period 3",
+        "start": "10:55",
+        "end": "11:52"
+      },
+      {
+        "id": "P4",
+        "label": "Period 4",
+        "start": "11:59",
+        "end": "12:56"
+      },
+      {
+        "id": "P5",
+        "label": "Period 5",
+        "start": "13:43",
+        "end": "14:40"
+      },
+      {
+        "id": "P6",
+        "label": "Period 6",
+        "start": "14:47",
+        "end": "15:44"
+      }
+    ],
+    "wednesday": [
+      {
+        "id": "B1",
+        "label": "Block 1",
+        "start": "09:00",
+        "end": "10:46"
+      },
+      {
+        "id": "B3",
+        "label": "Block 3",
+        "start": "10:53",
+        "end": "12:35"
+      },
+      {
+        "id": "B5",
+        "label": "Block 5",
+        "start": "13:22",
+        "end": "15:04"
+      }
+    ],
+    "thursday": [
+      {
+        "id": "B2",
+        "label": "Block 2",
+        "start": "08:45",
+        "end": "10:31"
+      },
+      {
+        "id": "B4",
+        "label": "Block 4",
+        "start": "10:38",
+        "end": "12:20"
+      },
+      {
+        "id": "B6",
+        "label": "Block 6",
+        "start": "14:02",
+        "end": "15:44"
+      }
+    ],
+    "minimum": [
+      {
+        "id": "P1",
+        "label": "Period 1",
+        "start": "08:45",
+        "end": "09:22"
+      },
+      {
+        "id": "P2",
+        "label": "Period 2",
+        "start": "09:29",
+        "end": "10:06"
+      },
+      {
+        "id": "P3",
+        "label": "Period 3",
+        "start": "10:13",
+        "end": "10:50"
+      },
+      {
+        "id": "P4",
+        "label": "Period 4",
+        "start": "10:57",
+        "end": "11:34"
+      },
+      {
+        "id": "P5",
+        "label": "Period 5",
+        "start": "11:41",
+        "end": "12:18"
+      },
+      {
+        "id": "P6",
+        "label": "Period 6",
+        "start": "13:05",
+        "end": "13:41"
+      }
+    ]
+  }
+}

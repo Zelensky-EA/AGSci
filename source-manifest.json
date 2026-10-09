@@ -1,0 +1,66 @@
+{
+  "edition": "EAHS Agriculture",
+  "preparedDate": "2026-10-08",
+  "baselines": [
+    {
+      "filename": "EAHS-barcode-databases-update.zip",
+      "sha256": "9cfada244d9c0035962d5fbbdabdf037a318a668a19ed6402b361612d64b5e54"
+    },
+    {
+      "filename": "EAHS-pricing-notice-update.zip",
+      "sha256": "592496eae561d83ae4ccf76f51ec00243cfa10cff9d16fbcfce141df80148315"
+    }
+  ],
+  "locations": [
+    "214",
+    "215",
+    "Prep Area",
+    "Shop",
+    "Floristry",
+    "Shed",
+    "Farm"
+  ],
+  "materialCategories": 50,
+  "otherOption": true,
+  "catalogSuggestions": 187,
+  "deploymentStatus": "Not deployed",
+  "files": {
+    ".gitignore": "93340984870af40a20130582ee4dcba56c38b1b957280814f0bb6d0788fc75d6",
+    "MATERIALS.md": "d54149e1aebd38326123cc0e60f8b48195d6da152062752c3770fca622bd1737",
+    "README.md": "4596d083d91e63864a91f1724132e03d9fa179795bd9ec94fff92b44b3c5f3df",
+    "apps-script/AgSetup.gs": "e489dad24f3c27ff97eb5eb9285a5a02d85d1ea6ea38b5b79f3a5e0e234a8b75",
+    "apps-script/AutomaticPricing.gs": "73e61b47b40b0990c7f59d2939c1880c2a8853e592e3ce7ab000a794b1ffdd0a",
+    "apps-script/Barcode.gs": "e30dfbdeae0afb97bebf00e18bb82147a2c6772308e3f0f1458b1edcd218f35b",
+    "apps-script/Catalog.gs": "09b733e66a8be8acf9f731e4589dea7cbce846b6b1f0d9ebee7f24d59b4c600b",
+    "apps-script/Code.gs": "ae5ccfb002fe85c8eb2d3fa0c3871cfbeaf40c44401f8845a4a2622038cffbbf",
+    "apps-script/DepartmentConfig.gs": "8200edda1dba5eaf1814f8cc9873383e23cefc7ec890bd210876b80c4bb43e1a",
+    "apps-script/Hub.gs": "de5f14de94a1946bf80e229b32a89cc18e319b59d01707e659e40dc6c9d37d68",
+    "apps-script/HubClient.html": "fc8e24a7a83324531ebb4dd1fc6361131f739f69bfa1d6fe779666ea4d0c8f4f",
+    "apps-script/HubIndex.html": "54216b24b5acc9eecfd4d9c9e4bb5a81963b2729213b93d06f2b284fa605e75b",
+    "apps-script/Index.html": "c60336b23a490b97b26eedadcf62fd1292d2a829b9d41160c745f888bc9eb4b1",
+    "apps-script/InventoryClient.html": "bf920246cb12deb7612f4aae6672f26e0a7abf6964f1b271e60a6e8c8b4f44e4",
+    "apps-script/PricingCatalog.gs": "ee7bcf8a90907a69f68e0202ebacaf3e12bd9f3fd1c74cd067f44901bdda207d",
+    "apps-script/ReservationClient.html": "363728c668e6c87c0b532a7ecae14313e50e92b6670e6a92c6db135970e011d8",
+    "apps-script/Reservations.gs": "3fbb2ac160d1c03e9a3450ef43e7c2657b5d9d145e72f28872dd4bb9022f8c3b",
+    "apps-script/Reservations.html": "6a6083fdaf68f19a2855c0de6c14040a63365cd0a6f01e79c266be767544a2cf",
+    "apps-script/appsscript.json": "9db3cabc0342488e55258979c4e376f49584f9174e431c009385c8278ce4a137",
+    "category-fixture.json": "a08ef46fed9170a34bcb4a5af91ee6639bda70518addf06291e911b10ea19850",
+    "department-defaults.json": "eafc108c947639884a6daa163e5fec725c69189c44b70d0a4562a09068ee46e1",
+    "docs/.nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/catalog_reference.csv": "45fef59d53fe175f1fd9ac9c07c755fa6475feb7755488cbc77fd4c0274e0fd7",
+    "docs/hub.css": "4a56682f0b6a627738aad2b3fd9757419521b7488ad9c9c15aeacb158a7e4ca4",
+    "docs/index.html": "4ea83538dde7013533f6807e933b89ee6de1f52bb23eff996ec8ef80449f1d7e",
+    "docs/inventory.html": "686f7e8ff2809f4be347f61980c9cea7a3a421958a0ce85a7e3f6c2b65db2814",
+    "docs/inventory_template.csv": "b724acb8aa855b1d6242c02619e6a23d6116e47a4262cf2fcb47df9ff719092e",
+    "docs/launch.js": "37985e9c95b0d85fbcab33ef33799683906420475e6e904d2a43e26184e845d4",
+    "docs/reservations.html": "d787d2260b587bd9f51881dc09bad817fd4f9a550ed0e666b82c526ebd7fe001",
+    "docs/site-config.js": "9fa371138692ceaa8df318eff268b42b8c0421119eeabc408ec622264b0038dd",
+    "docs/styles.css": "e2064c0707751a1f3e59bd4da9a2be1f9b2e747b0cf5f33fcbcf301c35234885",
+    "inventory_examples_DO_NOT_IMPORT.csv": "a2440a68fda70c770268725c680cfb8fb9f39166114e6e70211ce1d0cd8e0f4c",
+    "pricing-research-request.txt": "eb945db605c572fb663382092db4423001e19590d0b7f8a8c08a1ce9bbe3a6e7",
+    "verify-ag.cjs": "1335a4432f0aee3bfd67c5fece675780a167af369ba10db78e2b6f45ae430320",
+    "verify-barcodes.cjs": "71773466d847f416bc939a3ecef3c7a67c0b799db1cd2d96e66826862904448a",
+    "verify-categories.cjs": "e4a0779faf2d0f9d57149f963c0842869a3fe098565b0ee356024769dab879f7",
+    "verify.cjs": "841f70b11c9e120d3ca1ecfd7dcb960d823c71efa5d34597804e5f99d83b1b8f"
+  }
+}

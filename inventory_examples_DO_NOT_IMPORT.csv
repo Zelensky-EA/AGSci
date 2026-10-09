@@ -1,0 +1,4 @@
+sku,name,category,kind,quantity,unit,location,storage,minStock,manufacturer,catalogNumber,hazard,expiration,notes,unitPrice,priceSource
+,"Example only: nitrile gloves, medium, 100 per box",Disposable PPE & first aid,Consumable,0,box,Prep Area,,0,,,,,Verify the exact product and actual count before importing.,,
+,"Example only: feed, species/formula, 50 lb bag",Feed & supplements,Consumable,0,bag,Farm,,0,,,,,"One bag is one counted unit, not 50 units.",,
+,"Example only: hand pruner, exact model",Plant care tools,Reusable,0,each,Floristry,,0,,,,,Replace this example with the owned model and count.,,

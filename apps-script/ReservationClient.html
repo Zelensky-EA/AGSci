@@ -1,0 +1,77 @@
+const CONFIG = window.EAHS_AG_CONFIG;
+
+
+
+
+
+function agToday(){return new Intl.DateTimeFormat("en-CA",{timeZone:CONFIG.timeZone,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
+let selectedLocation = CONFIG.locations[0];
+let weekStart = mondayOf(new Date(agToday()+"T12:00:00"));
+let reservations = [];
+let weekLoadGeneration = 0, availabilityReady = false, availabilityMessage = "Checking…";
+const grid = document.querySelector("#calendarGrid");
+const status = document.querySelector("#status");
+const dialog = document.querySelector("#bookingDialog");
+const form = document.querySelector("#bookingForm");
+
+function mondayOf(date){const d=new Date(date);d.setHours(0,0,0,0);const day=d.getDay();d.setDate(d.getDate()-(day===0?6:day-1));return d}
+function addDays(date,n){const d=new Date(date);d.setDate(d.getDate()+n);return d}
+function ymd(date){return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-")}
+function slotsFor(date){if(CONFIG.closedDates.includes(ymd(date)))return [];if(CONFIG.minimumDays.includes(ymd(date)))return CONFIG.reservationSlots.minimum;const d=date.getDay();if(d===3)return CONFIG.reservationSlots.wednesday;if(d===4)return CONFIG.reservationSlots.thursday;return CONFIG.reservationSlots.regular}
+function displayTime(t){return new Date(`2000-01-01T${t}:00`).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}
+function reservationFor(date,slot){return reservations.find(r=>r.date===ymd(date)&&r.start<slot.end&&slot.start<r.end)}
+function isPast(date,slot){const now=new Intl.DateTimeFormat("sv-SE",{timeZone:CONFIG.timeZone,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date());return `${ymd(date)} ${slot.start}`<=now}
+
+function render(){
+  const end=addDays(weekStart,4);
+  document.querySelector("#weekTitle").textContent=`${weekStart.toLocaleDateString("en-US",{month:"short",day:"numeric"})} – ${end.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}`;
+  grid.innerHTML="";
+  for(let i=0;i<5;i++){
+    const date=addDays(weekStart,i), day=document.createElement("article");
+    day.className=`day ${ymd(date)===agToday()?"today":""}`;
+    day.innerHTML=`<div class="day-header"><span class="day-name">${date.toLocaleDateString("en-US",{weekday:"long"})}</span><span class="day-date">${date.toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span></div><div class="slot-list"></div>`;
+    const list=day.querySelector(".slot-list");
+    slotsFor(date).forEach(slot=>{
+      const existing=reservationFor(date,slot), past=isPast(date,slot), button=document.createElement("button");
+      button.className=`slot ${existing?"booked":""} ${past?"past":""}`;button.disabled=Boolean(!availabilityReady||existing||past);
+      button.innerHTML=!availabilityReady?`<strong>${slot.label}</strong><span>${displayTime(slot.start)}–${displayTime(slot.end)} · ${availabilityMessage}</span>`:existing?`<strong>${slot.label} · Booked</strong><span>${escapeHtml(existing.course||"Reserved")} · ${escapeHtml(existing.teacherName||"Teacher")}</span>`:`<strong>${slot.label}</strong><span>${displayTime(slot.start)}–${displayTime(slot.end)} · Available</span>`;
+      if(availabilityReady&&!existing&&!past)button.addEventListener("click",()=>openBooking(date,slot));list.append(button);
+    });grid.append(day);
+  }
+}
+function escapeHtml(v){const d=document.createElement("div");d.textContent=v;return d.innerHTML}
+function openBooking(date,slot){if(!availabilityReady||reservationFor(date,slot)||isPast(date,slot))return;form.reset();document.querySelector("#bookingDate").value=ymd(date);document.querySelector("#bookingStart").value=slot.start;document.querySelector("#bookingEnd").value=slot.end;document.querySelector("#bookingLocation").value=selectedLocation;document.querySelector("#bookingRequestId").value="ag-book-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2);document.querySelector("#slotHeading").textContent=`${selectedLocation} · ${slot.label} · ${date.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"})}`;document.querySelector("#formMessage").textContent="";dialog.showModal()}
+
+function reservationRpc(action,params){return new Promise((resolve,reject)=>{
+ const run=google.script.run.withSuccessHandler(data=>resolve({ok:true,...data})).withFailureHandler(e=>reject(Error(e.message||String(e))));
+ if(action==='availability')run.getAgReservations(params);else run.saveAgReservation(params);
+})}
+async function loadWeek(){
+  const generation=++weekLoadGeneration,requestedWeek=new Date(weekStart);
+  availabilityReady=false;availabilityMessage="Checking…";reservations=[];render();
+  if(!(window.google&&google.script&&google.script.run)){availabilityMessage="Service not connected";status.textContent="Open the deployed Ag space reservations page to check availability.";render();return false}
+  status.textContent="Checking availability…";
+  try{
+    const result=await reservationRpc("availability",{location:selectedLocation,start:ymd(requestedWeek),end:ymd(addDays(requestedWeek,5))});
+    if(generation!==weekLoadGeneration)return null;
+    if(!result.ok)throw new Error(result.error||"Could not check availability.");
+    if(!Array.isArray(result.reservations))throw new Error("The calendar returned incomplete availability. Try again.");
+    reservations=result.reservations;availabilityReady=true;render();status.textContent="";return true;
+  }catch(e){
+    if(generation!==weekLoadGeneration)return null;
+    reservations=[];availabilityMessage="Availability unknown";status.textContent=e.message+" Booking is disabled until availability is checked. Use Today or the week controls to retry.";render();return false;
+  }
+}
+form.addEventListener("submit",async e=>{
+ e.preventDefault();const data=Object.fromEntries(new FormData(form));data.needsPrep=Boolean(data.needsPrep);
+ const submit=document.querySelector("#submitBooking");submit.disabled=true;submit.textContent="Reserving…";document.querySelector("#formMessage").textContent="";
+ try{const result=await reservationRpc("book",data);if(!result.ok)throw Error(result.error||"Reservation failed.");dialog.close();const refreshed=await loadWeek();status.textContent=result.message+(refreshed===false?" "+status.textContent:"");}
+ catch(err){document.querySelector("#formMessage").textContent=err.message+" If the response was interrupted, retry this form to check the same request without duplicating it.";}
+ finally{submit.disabled=false;submit.textContent="Reserve space"}
+});
+const locationSelect=document.querySelector('#locationSelect');
+locationSelect.innerHTML=CONFIG.locations.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join('');
+locationSelect.onchange=()=>{selectedLocation=locationSelect.value;loadWeek()};
+document.querySelector('#courseOptions').innerHTML='<option value="">Choose course / program</option>'+CONFIG.courses.map(x=>`<option>${escapeHtml(x)}</option>`).join('')+'<option>Other</option>';
+document.querySelector('#reservationWindow').textContent=CONFIG.reservationAdvanceDays+' days';
+document.querySelector("#prevWeek").onclick=()=>{weekStart=addDays(weekStart,-7);loadWeek()};document.querySelector("#nextWeek").onclick=()=>{weekStart=addDays(weekStart,7);loadWeek()};document.querySelector("#today").onclick=()=>{weekStart=mondayOf(new Date(agToday()+"T12:00:00"));loadWeek()};document.querySelector("#closeDialog").onclick=()=>dialog.close();document.querySelector("#cancelBooking").onclick=()=>dialog.close();loadWeek();
